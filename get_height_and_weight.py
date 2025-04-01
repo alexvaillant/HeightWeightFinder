@@ -1,5 +1,6 @@
 import sys
 import os
+import ast
 from PIL import Image
 
 import specified_helper_functions as helper
@@ -38,6 +39,8 @@ def _add(coordinate, width_or_height):
     return width_or_height
 
 def _enlarge_body_crop(original_img_path, body_crop_bbox):
+    if type(body_crop_bbox) is str:
+        body_crop_bbox = ast.literal_eval(body_crop_bbox)
     original_img = Image.open(original_img_path)
     width, height = original_img.size
     new_body_crop_bbox = [
