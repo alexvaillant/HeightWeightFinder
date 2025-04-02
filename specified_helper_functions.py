@@ -28,9 +28,12 @@ def collect_all_footage_dfs(anon_type):
     get_all_city_folders = _get_all_city_folders(unedited_folder)
     unedited_footage_df = {}
 
+    if anon_type == "unedited":
+        anon_type = "pre_processed"
+
     for city_path in get_all_city_folders:
         city_name = str(city_path).split("/")[-1]
-        city_df = pd.read_excel(os.path.join(city_path, f"{city_name}_pre_processed.xlsx"))
+        city_df = pd.read_excel(os.path.join(city_path, f"{city_name}_{anon_type}.xlsx"))
         unedited_footage_df[city_name] = city_df
 
     return unedited_footage_df
